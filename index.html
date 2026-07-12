@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Casamento de Luíza e Henrique — 04 de agosto de 2026, Belo Horizonte">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<title>Luíza & Henrique — 04.08.2026</title>
+<style>
+  :root{
+    --creme:#F7F1E3; --papel:#FCF8EE; --vinho:#7E3231; --vinho-esc:#5F2423;
+    --oliva:#877B3D; --rosa:#C89F97; --dourado:#A98C4B;
+    --tinta:#3A2E2A; --suave:#7A6A60; --linha:#E3D5BE;
+  }
+  *{box-sizing:border-box}
+  /* piso da capela: azulejos em quatrefólio rosa/oliva/vinho emoldurando a página */
+  html,body{
+    background-color:#E9DCC5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%23EFE4CF'/%3E%3Cg fill='%23E7CFC3' stroke='%23BE8F80' stroke-width='1.3'%3E%3Ccircle cx='36' cy='22' r='13'/%3E%3Ccircle cx='22' cy='36' r='13'/%3E%3Ccircle cx='50' cy='36' r='13'/%3E%3Ccircle cx='36' cy='50' r='13'/%3E%3C/g%3E%3Ccircle cx='36' cy='36' r='7.5' fill='%23F5EDDD' stroke='%23877B3D' stroke-width='1'/%3E%3Ccircle cx='36' cy='36' r='2.4' fill='%237E3231'/%3E%3Cg fill='%23877B3D'%3E%3Cellipse cx='36' cy='10' rx='2' ry='4'/%3E%3Cellipse cx='36' cy='62' rx='2' ry='4'/%3E%3Cellipse cx='10' cy='36' rx='4' ry='2'/%3E%3Cellipse cx='62' cy='36' rx='4' ry='2'/%3E%3C/g%3E%3Cg stroke='%23B98A7E' stroke-width='1' fill='none'%3E%3Crect x='2' y='2' width='8' height='8'/%3E%3Crect x='62' y='2' width='8' height='8'/%3E%3Crect x='2' y='62' width='8' height='8'/%3E%3Crect x='62' y='62' width='8' height='8'/%3E%3C/g%3E%3Cg fill='%237E3231'%3E%3Ccircle cx='6' cy='6' r='1.5'/%3E%3Ccircle cx='66' cy='6' r='1.5'/%3E%3Ccircle cx='6' cy='66' r='1.5'/%3E%3Ccircle cx='66' cy='66' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:64px 64px;
+  }
+  body{
+    margin:0; color:var(--tinta);
+    font-family:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+    font-size:16.5px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* a folha do convite sobre o piso */
+  .pagina{
+    max-width:940px;
+    margin:clamp(16px,3.5vw,46px) auto;
+    background:var(--papel);
+    border:1.5px solid var(--vinho);
+    padding:7px;border-radius:3px;
+    box-shadow:0 3px 28px rgba(94,44,35,.22);
+  }
+  .pagina-in{border:1px solid var(--oliva);border-radius:2px;overflow:hidden}
+  .serif{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif}
+  .wrap{max-width:660px;margin:0 auto;padding:0 22px}
+  .eyebrow{
+    font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--oliva);font-weight:600;
+  }
+  a{color:var(--vinho)}
+  :focus-visible{outline:2px solid var(--dourado);outline-offset:3px;border-radius:2px}
+
+  /* ---------- hero: espelho do convite, dentro do arco ---------- */
+  header{padding:44px 0 58px;text-align:center}
+  .arco{
+    max-width:480px;margin:0 auto;padding:9px;
+    border:1.5px solid var(--vinho);
+    border-radius:230px 230px 14px 14px;
+  }
+  .arco-in{
+    border:1px solid var(--oliva);
+    border-radius:222px 222px 9px 9px;
+    padding:64px 26px 44px;
+    background:var(--papel);
+  }
+  .monograma{
+    font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;
+    font-size:34px;color:var(--dourado);letter-spacing:-.06em;
+    line-height:1;margin-bottom:26px;
+  }
+  .convite-linha{
+    font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--tinta);max-width:34ch;margin:0 auto 4px;line-height:1.9;
+  }
+  h1{
+    font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;
+    font-size:clamp(44px,9.5vw,64px);line-height:1.02;
+    color:var(--vinho);margin:22px 0 8px;
+  }
+  h1 .e{
+    font-style:italic;color:var(--oliva);font-size:.42em;
+    display:block;margin:8px 0;font-weight:400;
+  }
+  .data-hero{
+    font-family:"Cormorant Garamond",Georgia,serif;
+    font-size:24px;letter-spacing:.34em;color:var(--vinho);
+    margin:14px 0 2px;text-indent:.34em;
+  }
+  .cidade{font-family:"Cormorant Garamond",Georgia,serif;font-size:18px;color:var(--tinta)}
+  .flor{margin:18px auto 16px;display:block}
+  .programa{
+    font-family:"Cormorant Garamond",Georgia,serif;font-size:18px;
+    line-height:2;color:var(--tinta);
+  }
+  .programa b{color:var(--vinho);font-weight:600;margin-right:6px}
+  .programa i{color:var(--rosa);font-style:normal;margin:0 4px}
+  .contagem{display:flex;justify-content:center;gap:28px;margin-top:34px}
+  .contagem div{min-width:52px}
+  .contagem b{
+    display:block;font-family:"Cormorant Garamond",Georgia,serif;
+    font-size:34px;font-weight:500;line-height:1;color:var(--vinho);
+  }
+  .contagem span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--suave)}
+
+  /* ---------- seções ---------- */
+  section{padding:58px 0;border-top:1px solid var(--linha)}
+  h2{
+    font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;
+    font-size:clamp(30px,6vw,40px);color:var(--vinho);margin:10px 0 14px;
+  }
+  .nota{
+    font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;
+    font-size:19px;color:var(--suave);margin:0 0 26px;
+  }
+  .evento{margin-top:26px}
+  .evento h3{
+    font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;
+    font-size:24px;margin:0 0 2px;
+  }
+  .hora{
+    font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;
+    font-size:20px;color:var(--oliva);margin:0 0 4px;
+  }
+  .endereco{color:var(--suave);margin:0 0 12px}
+  .botoes{display:flex;flex-wrap:wrap;gap:10px}
+  .botao{
+    display:inline-block;padding:9px 18px;border:1px solid var(--vinho);
+    border-radius:999px;color:var(--vinho);text-decoration:none;
+    font-size:14px;font-weight:600;background:transparent;cursor:pointer;
+    font-family:inherit;
+    transition:background .15s ease,color .15s ease;
+  }
+  .botao:hover{background:var(--vinho);color:var(--papel)}
+  .botao-cheio{background:var(--vinho);color:var(--papel);border-color:var(--vinho)}
+  .botao-cheio:hover{background:var(--vinho-esc)}
+
+  /* ---------- menu de presentes ---------- */
+  .prato{border:0;border-bottom:1px solid var(--linha)}
+  .prato summary{
+    list-style:none;cursor:pointer;padding:17px 0;
+    display:flex;align-items:baseline;gap:10px;
+  }
+  .prato summary::-webkit-details-marker{display:none}
+  .prato-titulo{
+    font-family:"Cormorant Garamond",Georgia,serif;font-size:21px;
+    font-weight:600;line-height:1.25;
+  }
+  .pontilhado{flex:1;min-width:24px;border-bottom:2px dotted var(--rosa);transform:translateY(-4px)}
+  .preco{
+    font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;
+    white-space:nowrap;color:var(--vinho);
+  }
+  .prato[open] summary .prato-titulo{color:var(--vinho)}
+  .prato-corpo{padding:0 0 22px}
+  .prato-desc{
+    font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;
+    font-size:18px;color:var(--suave);margin:0 0 14px;
+  }
+  .pix-caixa{
+    background:var(--papel);border:1px solid var(--linha);border-radius:10px;
+    padding:16px;
+  }
+  .pix-caixa p{margin:0 0 10px;font-size:14px;color:var(--suave)}
+  .pix-codigo{
+    font-family:ui-monospace,Menlo,monospace;font-size:11.5px;
+    word-break:break-all;background:var(--creme);border-radius:6px;
+    padding:10px;margin-bottom:12px;color:var(--tinta);
+    max-height:74px;overflow-y:auto;
+  }
+  .copiado{color:var(--oliva);font-weight:600;font-size:14px;margin-left:10px}
+
+  /* ---------- rsvp / rodapé ---------- */
+  .rsvp{text-align:center}
+  .rsvp p{max-width:460px;margin:0 auto 16px}
+  .prazo{
+    font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;
+    font-size:19px;color:var(--vinho);margin-bottom:24px;
+  }
+  footer{
+    text-align:center;padding:54px 22px 40px;color:var(--suave);font-size:14px;
+    border-top:1px solid var(--linha);
+  }
+  footer .serif{font-size:26px;font-style:italic;color:var(--vinho);display:block;margin-bottom:6px}
+
+  @media (prefers-reduced-motion: no-preference){
+    .arco-in > .sobe{animation:sobe .9s ease both}
+    .arco-in > .sobe:nth-child(2){animation-delay:.1s}
+    .arco-in > .sobe:nth-child(3){animation-delay:.2s}
+    .arco-in > .sobe:nth-child(4){animation-delay:.3s}
+    .arco-in > .sobe:nth-child(n+5){animation-delay:.4s}
+    @keyframes sobe{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  }
+</style>
+
+<div class="pagina"><div class="pagina-in">
+
+<header>
+  <div class="wrap">
+    <div class="arco">
+      <div class="arco-in">
+        <div class="monograma sobe">LH</div>
+        <p class="convite-linha sobe">Para celebrarmos nossos 10 anos de amor, convidamos você para o nosso casamento.</p>
+        <h1 class="sobe">Luíza <span class="e">e</span> Henrique</h1>
+        <div class="sobe">
+          <div class="data-hero">04.08.2026</div>
+          <div class="cidade">Belo Horizonte | MG</div>
+        </div>
+        <svg class="flor sobe" width="120" height="16" viewBox="0 0 120 16" aria-hidden="true">
+          <g stroke="#877B3D" stroke-width="1" fill="none">
+            <line x1="0" y1="8" x2="46" y2="8"/><line x1="74" y1="8" x2="120" y2="8"/>
+            <path d="M52 8 Q56 2 60 8 Q64 14 68 8" />
+          </g>
+          <circle cx="60" cy="8" r="2.2" fill="#7E3231"/>
+        </svg>
+        <div class="programa sobe">
+          <div><b>11h</b><i>•</i>Bênção na Capela do Colégio Arnaldo</div>
+          <div><b>12h30</b><i>•</i>Almoço no Instituto Ivo Faria</div>
+        </div>
+      </div>
+    </div>
+    <div class="contagem" id="contagem" aria-label="Contagem regressiva para o casamento">
+      <div><b id="cd">—</b><span>dias</span></div>
+      <div><b id="ch">—</b><span>horas</span></div>
+      <div><b id="cm">—</b><span>min</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="dia">
+  <div class="wrap">
+    <span class="eyebrow">O grande dia</span>
+    <h2>Bênção &amp; Almoço</h2>
+    <p class="nota">
+      Fique à vontade para participar da bênção na capela ou, se preferir,
+      nos encontrar diretamente no almoço. O mais importante para nós é
+      celebrar esse dia com você.
+    </p>
+
+    <div class="evento">
+      <h3>Bênção</h3>
+      <p class="hora">11h — terça-feira</p>
+      <p class="endereco">Capela do Colégio Arnaldo — Belo Horizonte</p>
+      <div class="botoes">
+        <a class="botao" href="https://www.google.com/maps/search/?api=1&query=Capela+do+Col%C3%A9gio+Arnaldo+Belo+Horizonte" target="_blank" rel="noopener">Google Maps</a>
+        <a class="botao" href="https://waze.com/ul?q=Col%C3%A9gio%20Arnaldo%20Belo%20Horizonte&navigate=yes" target="_blank" rel="noopener">Waze</a>
+      </div>
+    </div>
+
+    <div class="evento">
+      <h3>Almoço</h3>
+      <p class="hora">12h30</p>
+      <p class="endereco">Instituto Ivo Faria — Rua Modesto de Carvalho Araújo, 652, Belvedere</p>
+      <div class="botoes">
+        <a class="botao" href="https://www.google.com/maps/search/?api=1&query=Rua+Modesto+de+Carvalho+Ara%C3%BAjo+652+Belvedere+Belo+Horizonte" target="_blank" rel="noopener">Google Maps</a>
+        <a class="botao" href="https://waze.com/ul?q=Rua%20Modesto%20de%20Carvalho%20Ara%C3%BAjo%20652%20Belo%20Horizonte&navigate=yes" target="_blank" rel="noopener">Waze</a>
+        <a class="botao" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bformatted_address%5D=Rua%20Modesto%20de%20Carvalho%20Ara%C3%BAjo%2C%20652%20-%20Belvedere%2C%20Belo%20Horizonte" target="_blank" rel="noopener">Uber</a>
+      </div>
+    </div>
+
+    <div class="evento">
+      <h3>Dress code</h3>
+      <p class="nota" style="margin:4px 0 0">À vontade — venha como você é. É almoço em família.</p>
+    </div>
+  </div>
+</section>
+
+<section id="presentes">
+  <div class="wrap">
+    <span class="eyebrow">Lista de presentes</span>
+    <h2>Menu de experiências</h2>
+    <p class="nota">
+      Curadoria exclusiva de vivências que ninguém vai viver. Escolha a sua,
+      pague no PIX e pronto: a experiência é por nossa conta — a lembrança, por sua conta e risco.
+    </p>
+    <div id="cardapio"></div>
+  </div>
+</section>
+
+<section class="rsvp" id="rsvp">
+  <div class="wrap">
+    <span class="eyebrow">Confirmação</span>
+    <h2>Você vem?</h2>
+    <p>Confirme sua presença com a Lu pelo WhatsApp — a mensagem já vai pronta.
+    Se tiver alguma restrição alimentar, conte pra gente na confirmação, para
+    prepararmos tudo com o carinho que esse dia merece.</p>
+    <p class="prazo">Pedimos a gentileza de confirmar até 18 de julho.</p>
+    <a class="botao botao-cheio" href="https://wa.me/5511997780404?text=Oi%2C%20Lu!%20Confirmo%20minha%20presen%C3%A7a%20no%20casamento%20de%20voc%C3%AAs%20no%20dia%2004%2F08.%20Somos%20___%20pessoas.%20Restri%C3%A7%C3%A3o%20alimentar%3A%20___%20%F0%9F%A4%8D" target="_blank" rel="noopener">Confirmar presença no WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <span class="serif">Com carinho, Luíza &amp; Henrique</span>
+  04 de agosto de 2026 — Belo Horizonte, MG
+</footer>
+
+</div></div>
+
+<script>
+const PRESENTES = [{"titulo": "Voo de asa-delta da Cruz do Monte", "desc": "Decolagem panorâmica com vista privilegiada de Pitangui. Equipamento não incluso.", "valor": 1000, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654071000.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304FA65"}, {"titulo": "Jantar romântico no Geraldo Sexta-feira", "desc": "Experiência gastronômica à luz de velas na lendária onça de Pitangui.", "valor": 330, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406330.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304EFF7"}, {"titulo": "Mergulho no areião do Véio da Taipa", "desc": "Imersão completa. Toalha por conta do mergulhador.", "valor": 250, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406250.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***630472EA"}, {"titulo": "Cota do ônibus especial pra grande festa", "desc": "Transporte executivo de alto padrão. Assentos por ordem de chegada.", "valor": 120, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406120.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304C0C3"}, {"titulo": "Visita ao túmulo do Padre Libério", "desc": "Roteiro devocional em Leandro Ferreira. Bênçãos garantidas.", "valor": 90, "pix": "00020126330014br.gov.bcb.pix011108195316697520400005303986540590.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63047CF4"}, {"titulo": "Exploração do sobrado da Maria Tangará", "desc": "Expedição histórico-arquitetônica. Entrar por conta e risco.", "valor": 100, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406100.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63046C46"}, {"titulo": "Tour completo no Coleginho — Arnaldo BH", "desc": "Visita guiada às dependências onde tudo começou.", "valor": 70, "pix": "00020126330014br.gov.bcb.pix011108195316697520400005303986540570.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63040B0C"}, {"titulo": "Aula de surf no Rio Arruda", "desc": "Aulas com instrutor local. Ondas sujeitas a disponibilidade.", "valor": 250, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406250.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***630472EA"}, {"titulo": "Banho de cachoeira no Retiro", "desc": "Experiência de spa 100% natural, temperatura não regulável.", "valor": 80, "pix": "00020126330014br.gov.bcb.pix011108195316697520400005303986540580.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304A2A6"}, {"titulo": "Viagem de cruzeiro na Lagoa da Pampulha", "desc": "Cruzeiro all-inclusive com vista para a igrejinha. Não desembarcar.", "valor": 1000, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654071000.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304FA65"}, {"titulo": "Passe livre no Parque Guanapara", "desc": "Acesso ilimitado a todas as atrações. Válido para a temporada.", "valor": 330, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406330.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304EFF7"}, {"titulo": "Passeio de pedalinho/jegue no Parque Municipal", "desc": "Combo aquático-equestre exclusivo. Escolha do animal na hora.", "valor": 100, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406100.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63046C46"}, {"titulo": "Passeio de bicicleta na Grande Contorno", "desc": "Cicloturismo urbano de longa distância. Capacete recomendado.", "valor": 130, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406130.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63041E91"}, {"titulo": "Imersão hípica na fazenda do vovô Orlando", "desc": "Vivência rural completa com coleta de carrapato inclusa.", "valor": 700, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406700.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63046FCD"}, {"titulo": "Inseminação artificial dos gêmeos na clínica da Contorno", "desc": "Procedimento premium na renomada Gênesis. Resultados em dose dupla.", "valor": 3000, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654073000.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304635B"}, {"titulo": "Viagem da Cora e do Nico pra Maldivas", "desc": "Pacote internacional de luxo para os dois. Passaportes em dia.", "valor": 1500, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654071500.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304703B"}, {"titulo": "Vacina de raiva do John John na Suíça", "desc": "Turismo de saúde de altíssimo padrão nos Alpes.", "valor": 2000, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654072000.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63042FC4"}, {"titulo": "Kit de cerâmicas decorativas do Casquilho", "desc": "Peças artesanais de edição limitada, direto do ateliê.", "valor": 330, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406330.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304EFF7"}, {"titulo": "Footing na pracinha de Conquista no Dia dos Namorados", "desc": "Programa romântico tradicional, com direito a voltinhas.", "valor": 50, "pix": "00020126330014br.gov.bcb.pix011108195316697520400005303986540550.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304A789"}, {"titulo": "Par de ingressos do show do Belo no Mineirão", "desc": "Setor premium. Lenço para as lágrimas incluso.", "valor": 700, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406700.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63046FCD"}, {"titulo": "Serenata no Coreto", "desc": "Apresentação musical ao vivo sob demanda. Repertório da casa.", "valor": 150, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406150.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304FB3F"}, {"titulo": "Tour no Cu de Zebra", "desc": "Roteiro exclusivo pelo destino mais falado da região.", "valor": 120, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406120.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304C0C3"}, {"titulo": "Camisa do Galo assinada pelo Ronaldinho Gaúcho", "desc": "Item de colecionador. Autenticidade discutível.", "valor": 1200, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654071200.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63040B03"}, {"titulo": "Camisa do Cruzeiro assinada pelo Ronaldo Fenômeno", "desc": "Item de colecionador. Autenticidade igualmente discutível.", "valor": 1200, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654071200.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63040B03"}, {"titulo": "Conjunto de panelas Le Creuset", "desc": "O único item sério da lista. Ou não.", "valor": 2000, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654072000.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63042FC4"}];
+
+const fmt = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL",minimumFractionDigits:0});
+const cardapio = document.getElementById("cardapio");
+
+PRESENTES.forEach((p,i)=>{
+  const d=document.createElement("details");
+  d.className="prato";
+  d.innerHTML=`
+    <summary>
+      <span class="prato-titulo">${p.titulo}</span>
+      <span class="pontilhado" aria-hidden="true"></span>
+      <span class="preco">${fmt(p.valor)}</span>
+    </summary>
+    <div class="prato-corpo">
+      <p class="prato-desc">${p.desc}</p>
+      <div class="pix-caixa">
+        <p>Copie o código abaixo e cole na opção <strong>PIX copia e cola</strong> do seu banco. O valor já vai preenchido.</p>
+        <div class="pix-codigo">${p.pix}</div>
+        <button class="botao botao-cheio" data-i="${i}">Copiar código PIX</button><span class="copiado" hidden>Copiado ✓</span>
+      </div>
+    </div>`;
+  cardapio.appendChild(d);
+});
+
+cardapio.addEventListener("click", async e=>{
+  const b=e.target.closest("button[data-i]");
+  if(!b) return;
+  const codigo=PRESENTES[+b.dataset.i].pix;
+  try{ await navigator.clipboard.writeText(codigo); }
+  catch{
+    const t=document.createElement("textarea");
+    t.value=codigo; document.body.appendChild(t); t.select();
+    document.execCommand("copy"); t.remove();
+  }
+  const ok=b.nextElementSibling; ok.hidden=false;
+  setTimeout(()=>ok.hidden=true,2500);
+});
+
+const alvo=new Date("2026-08-04T11:00:00-03:00");
+function tick(){
+  const ms=Math.max(0,alvo-new Date());
+  document.getElementById("cd").textContent=Math.floor(ms/864e5);
+  document.getElementById("ch").textContent=Math.floor(ms/36e5)%24;
+  document.getElementById("cm").textContent=Math.floor(ms/6e4)%60;
+}
+tick(); setInterval(tick,30000);
+</script>
+
+</body>
+</html>
