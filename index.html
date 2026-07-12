@@ -55,14 +55,23 @@
   a{color:var(--vinho)}
   :focus-visible{outline:2px solid var(--dourado);outline-offset:3px;border-radius:2px}
 
-  /* ---------- hero: espelho do convite, sob a abóbada da capela ---------- */
-  header{padding:0 0 58px;text-align:center}
-  .abobada{display:block;width:100%;height:auto;pointer-events:none}
-  .hero-conteudo{margin-top:clamp(-88px,-9vw,-30px);position:relative}
+  /* ---------- hero: espelho do convite ---------- */
+  header{padding:44px 0 58px;text-align:center}
+  .arco{
+    max-width:480px;margin:0 auto;padding:9px;
+    border:1.5px solid var(--vinho);
+    border-radius:230px 230px 14px 14px;
+  }
+  .arco-in{
+    border:1px solid var(--oliva);
+    border-radius:222px 222px 9px 9px;
+    padding:64px 26px 44px;
+    background:var(--papel);
+  }
   .monograma{
     font-family:"Monsieur La Doulaise","Pinyon Script",cursive;
-    font-size:clamp(76px,15vw,118px);color:var(--dourado);
-    line-height:.85;margin-bottom:20px;
+    font-size:clamp(58px,11vw,76px);color:var(--dourado);
+    line-height:.85;margin-bottom:22px;
   }
   .convite-linha{
     font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;
@@ -230,11 +239,11 @@
   footer .serif{font-size:26px;font-style:italic;color:var(--vinho);display:block;margin-bottom:6px}
 
   @media (prefers-reduced-motion: no-preference){
-    .hero-conteudo > .sobe{animation:sobe .9s ease both}
-    .hero-conteudo > .sobe:nth-child(2){animation-delay:.1s}
-    .hero-conteudo > .sobe:nth-child(3){animation-delay:.2s}
-    .hero-conteudo > .sobe:nth-child(4){animation-delay:.3s}
-    .hero-conteudo > .sobe:nth-child(n+5){animation-delay:.4s}
+    .arco-in > .sobe{animation:sobe .9s ease both}
+    .arco-in > .sobe:nth-child(2){animation-delay:.1s}
+    .arco-in > .sobe:nth-child(3){animation-delay:.2s}
+    .arco-in > .sobe:nth-child(4){animation-delay:.3s}
+    .arco-in > .sobe:nth-child(n+5){animation-delay:.4s}
     @keyframes sobe{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   }
 </style>
@@ -242,21 +251,10 @@
 <div class="pagina"><div class="pagina-in">
 
 <header>
-  <svg class="abobada" viewBox="0 0 1000 300" aria-hidden="true">
-    <g fill="none" stroke-linecap="round">
-      <path d="M22 300 C30 112, 190 46, 468 86 C486 91, 497 106, 500 132" stroke="#C89F97" stroke-width="1.6"/>
-      <path d="M978 300 C970 112, 810 46, 532 86 C514 91, 503 106, 500 132" stroke="#C89F97" stroke-width="1.6"/>
-      <path d="M46 300 C52 132, 205 66, 466 104 C483 109, 496 122, 500 146" stroke="#7E3231" stroke-width="2"/>
-      <path d="M954 300 C948 132, 795 66, 534 104 C517 109, 504 122, 500 146" stroke="#7E3231" stroke-width="2"/>
-      <path d="M70 300 C74 152, 220 86, 464 122 C480 127, 496 138, 500 160" stroke="#C89F97" stroke-width="1.4"/>
-      <path d="M930 300 C926 152, 780 86, 536 122 C520 127, 504 138, 500 160" stroke="#C89F97" stroke-width="1.4"/>
-      <path d="M94 300 C96 172, 235 106, 462 140 C477 145, 496 152, 500 174" stroke="#877B3D" stroke-width="1.6"/>
-      <path d="M906 300 C904 172, 765 106, 538 140 C523 145, 504 152, 500 174" stroke="#877B3D" stroke-width="1.6"/>
-    </g>
-    <circle cx="500" cy="184" r="3" fill="#7E3231"/>
-  </svg>
-  <div class="wrap hero-conteudo">
-    <div class="monograma sobe">LH</div>
+  <div class="wrap">
+    <div class="arco">
+      <div class="arco-in">
+        <div class="monograma sobe">LH</div>
         <p class="convite-linha sobe">Para celebrarmos nossos 10 anos de amor, convidamos você para o nosso casamento.</p>
         <h1 class="sobe">Luíza <span class="e">e</span> Henrique</h1>
         <div class="sobe">
@@ -274,6 +272,8 @@
           <div><b>11h</b><i>•</i>Bênção na Capela do Colégio Arnaldo</div>
           <div><b>12h30</b><i>•</i>Almoço no Instituto Ivo Faria</div>
         </div>
+      </div>
+    </div>
     <div class="contagem" id="contagem" aria-label="Contagem regressiva para o casamento">
       <div><b id="cd">—</b><span>dias</span></div>
       <div><b id="ch">—</b><span>horas</span></div>
