@@ -39,7 +39,14 @@
     padding:7px;border-radius:3px;
     box-shadow:0 3px 28px rgba(94,44,35,.22);
   }
-  .pagina-in{border:1px solid var(--oliva);border-radius:2px;overflow:hidden}
+  .pagina-in{border:1px solid var(--oliva);border-radius:2px;overflow:hidden;position:relative}
+  /* arcos da capela nascendo dos cantos superiores da folha */
+  .canto{
+    position:absolute;top:-1px;width:clamp(70px,16vw,176px);height:auto;
+    pointer-events:none;opacity:.95;
+  }
+  .canto-esq{left:-1px}
+  .canto-dir{right:-1px;transform:scaleX(-1)}
   .serif{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif}
   .wrap{max-width:660px;margin:0 auto;padding:0 22px}
   .eyebrow{
@@ -133,28 +140,79 @@
   .botao-cheio{background:var(--vinho);color:var(--papel);border-color:var(--vinho)}
   .botao-cheio:hover{background:var(--vinho-esc)}
 
-  /* ---------- menu de presentes ---------- */
-  .prato{border:0;border-bottom:1px solid var(--linha)}
-  .prato summary{
-    list-style:none;cursor:pointer;padding:17px 0;
-    display:flex;align-items:baseline;gap:10px;
+  /* ---------- vitrine de experiências (carrossel) ---------- */
+  #presentes .wrap{max-width:860px}
+  .carrossel-wrap{position:relative}
+  .carrossel{
+    display:flex;gap:14px;overflow-x:auto;
+    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    padding:6px 2px 10px;scrollbar-width:none;
   }
-  .prato summary::-webkit-details-marker{display:none}
-  .prato-titulo{
+  .carrossel::-webkit-scrollbar{display:none}
+  .cartao{
+    scroll-snap-align:center;flex:0 0 min(74vw,290px);
+    border:1px solid var(--linha);border-radius:14px;background:var(--papel);
+    overflow:hidden;display:flex;flex-direction:column;
+    box-shadow:0 1px 12px rgba(94,44,35,.09);
+  }
+  .cartao-img{
+    aspect-ratio:4/3;display:grid;place-items:center;
+    font-size:72px;border-bottom:1px solid var(--linha);
+    text-shadow:0 2px 12px rgba(94,44,35,.18);
+  }
+  .cartao-corpo{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .cartao-num{
+    font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--oliva);font-weight:600;
+  }
+  .cartao-titulo{
     font-family:"Cormorant Garamond",Georgia,serif;font-size:21px;
-    font-weight:600;line-height:1.25;
+    font-weight:600;line-height:1.2;
   }
-  .pontilhado{flex:1;min-width:24px;border-bottom:2px dotted var(--rosa);transform:translateY(-4px)}
-  .preco{
-    font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;
-    white-space:nowrap;color:var(--vinho);
-  }
-  .prato[open] summary .prato-titulo{color:var(--vinho)}
-  .prato-corpo{padding:0 0 22px}
-  .prato-desc{
+  .cartao-desc{
     font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;
-    font-size:18px;color:var(--suave);margin:0 0 14px;
+    font-size:16px;color:var(--suave);flex:1;line-height:1.45;
   }
+  .cartao-rodape{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px}
+  .cartao-preco{
+    font-family:"Cormorant Garamond",Georgia,serif;font-size:21px;
+    color:var(--vinho);white-space:nowrap;
+  }
+  .seta{
+    display:none;position:absolute;top:38%;z-index:2;
+    width:42px;height:42px;border-radius:50%;
+    border:1px solid var(--vinho);background:var(--papel);color:var(--vinho);
+    font-size:24px;line-height:1;cursor:pointer;
+    place-items:center;box-shadow:0 2px 10px rgba(94,44,35,.15);
+  }
+  .seta:hover{background:var(--vinho);color:var(--papel)}
+  .seta-esq{left:-8px}
+  .seta-dir{right:-8px}
+  @media (hover:hover) and (min-width:700px){.seta{display:grid}}
+  .dica{
+    text-align:center;font-family:"Cormorant Garamond",Georgia,serif;
+    font-style:italic;font-size:17px;color:var(--suave);margin:14px 0 0;
+  }
+
+  /* modal do PIX */
+  .pix-modal{
+    border:1.5px solid var(--vinho);border-radius:16px;padding:5px;
+    max-width:430px;width:calc(100vw - 36px);background:var(--papel);
+    margin:auto;
+  }
+  .pix-modal::backdrop{background:rgba(43,32,28,.5)}
+  .pix-modal-in{border:1px solid var(--oliva);border-radius:12px;padding:22px;position:relative}
+  .pix-fechar{
+    position:absolute;top:10px;right:10px;width:34px;height:34px;
+    border:1px solid var(--linha);border-radius:50%;background:var(--creme);
+    color:var(--suave);font-size:18px;cursor:pointer;line-height:1;
+  }
+  .pix-modal h3{
+    font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;
+    font-size:24px;margin:0 34px 2px 0;color:var(--vinho);
+  }
+  .pix-modal .cartao-desc{margin:0 0 6px}
+  .pix-modal .cartao-preco{font-size:26px;display:block;margin:6px 0 14px}
   .pix-caixa{
     background:var(--papel);border:1px solid var(--linha);border-radius:10px;
     padding:16px;
@@ -192,6 +250,19 @@
 </style>
 
 <div class="pagina"><div class="pagina-in">
+
+<svg class="canto canto-esq" viewBox="0 0 166 166" aria-hidden="true">
+  <path d="M0 165 A165 165 0 0 0 165 0" stroke="#7E3231" stroke-width="1.6" fill="none"/>
+  <path d="M0 147 A147 147 0 0 0 147 0" stroke="#877B3D" stroke-width="1.1" fill="none"/>
+  <path d="M0 129 A129 129 0 0 0 129 0" stroke="#C89F97" stroke-width="1.1" fill="none"/>
+  <circle cx="0" cy="165" r="2.6" fill="#7E3231"/><circle cx="165" cy="0" r="2.6" fill="#7E3231"/>
+</svg>
+<svg class="canto canto-dir" viewBox="0 0 166 166" aria-hidden="true">
+  <path d="M0 165 A165 165 0 0 0 165 0" stroke="#7E3231" stroke-width="1.6" fill="none"/>
+  <path d="M0 147 A147 147 0 0 0 147 0" stroke="#877B3D" stroke-width="1.1" fill="none"/>
+  <path d="M0 129 A129 129 0 0 0 129 0" stroke="#C89F97" stroke-width="1.1" fill="none"/>
+  <circle cx="0" cy="165" r="2.6" fill="#7E3231"/><circle cx="165" cy="0" r="2.6" fill="#7E3231"/>
+</svg>
 
 <header>
   <div class="wrap">
@@ -271,9 +342,28 @@
       Curadoria exclusiva de vivências que ninguém vai viver. Escolha a sua,
       pague no PIX e pronto: a experiência é por nossa conta — a lembrança, por sua conta e risco.
     </p>
-    <div id="cardapio"></div>
+    <div class="carrossel-wrap">
+      <button class="seta seta-esq" id="seta-esq" aria-label="Experiência anterior">‹</button>
+      <div class="carrossel" id="carrossel" aria-label="Vitrine de experiências"></div>
+      <button class="seta seta-dir" id="seta-dir" aria-label="Próxima experiência">›</button>
+    </div>
+    <p class="dica">Deslize para conhecer as 25 experiências →</p>
   </div>
 </section>
+
+<dialog class="pix-modal" id="pix-modal">
+  <div class="pix-modal-in">
+    <button class="pix-fechar" id="pix-fechar" aria-label="Fechar">✕</button>
+    <h3 id="pm-titulo"></h3>
+    <p class="cartao-desc" id="pm-desc"></p>
+    <span class="cartao-preco" id="pm-preco"></span>
+    <div class="pix-caixa">
+      <p>Copie o código abaixo e cole na opção <strong>PIX copia e cola</strong> do seu banco. O valor já vai preenchido.</p>
+      <div class="pix-codigo" id="pm-codigo"></div>
+      <button class="botao botao-cheio" id="pm-copiar">Copiar código PIX</button><span class="copiado" id="pm-copiado" hidden>Copiado ✓</span>
+    </div>
+  </div>
+</dialog>
 
 <section class="rsvp" id="rsvp">
   <div class="wrap">
@@ -298,39 +388,59 @@
 const PRESENTES = [{"titulo": "Voo de asa-delta da Cruz do Monte", "desc": "Decolagem panorâmica com vista privilegiada de Pitangui. Equipamento não incluso.", "valor": 1000, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654071000.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304FA65"}, {"titulo": "Jantar romântico no Geraldo Sexta-feira", "desc": "Experiência gastronômica à luz de velas na lendária onça de Pitangui.", "valor": 330, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406330.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304EFF7"}, {"titulo": "Mergulho no areião do Véio da Taipa", "desc": "Imersão completa. Toalha por conta do mergulhador.", "valor": 250, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406250.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***630472EA"}, {"titulo": "Cota do ônibus especial pra grande festa", "desc": "Transporte executivo de alto padrão. Assentos por ordem de chegada.", "valor": 120, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406120.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304C0C3"}, {"titulo": "Visita ao túmulo do Padre Libério", "desc": "Roteiro devocional em Leandro Ferreira. Bênçãos garantidas.", "valor": 90, "pix": "00020126330014br.gov.bcb.pix011108195316697520400005303986540590.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63047CF4"}, {"titulo": "Exploração do sobrado da Maria Tangará", "desc": "Expedição histórico-arquitetônica. Entrar por conta e risco.", "valor": 100, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406100.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63046C46"}, {"titulo": "Tour completo no Coleginho — Arnaldo BH", "desc": "Visita guiada às dependências onde tudo começou.", "valor": 70, "pix": "00020126330014br.gov.bcb.pix011108195316697520400005303986540570.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63040B0C"}, {"titulo": "Aula de surf no Rio Arruda", "desc": "Aulas com instrutor local. Ondas sujeitas a disponibilidade.", "valor": 250, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406250.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***630472EA"}, {"titulo": "Banho de cachoeira no Retiro", "desc": "Experiência de spa 100% natural, temperatura não regulável.", "valor": 80, "pix": "00020126330014br.gov.bcb.pix011108195316697520400005303986540580.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304A2A6"}, {"titulo": "Viagem de cruzeiro na Lagoa da Pampulha", "desc": "Cruzeiro all-inclusive com vista para a igrejinha. Não desembarcar.", "valor": 1000, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654071000.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304FA65"}, {"titulo": "Passe livre no Parque Guanapara", "desc": "Acesso ilimitado a todas as atrações. Válido para a temporada.", "valor": 330, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406330.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304EFF7"}, {"titulo": "Passeio de pedalinho/jegue no Parque Municipal", "desc": "Combo aquático-equestre exclusivo. Escolha do animal na hora.", "valor": 100, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406100.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63046C46"}, {"titulo": "Passeio de bicicleta na Grande Contorno", "desc": "Cicloturismo urbano de longa distância. Capacete recomendado.", "valor": 130, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406130.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63041E91"}, {"titulo": "Imersão hípica na fazenda do vovô Orlando", "desc": "Vivência rural completa com coleta de carrapato inclusa.", "valor": 700, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406700.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63046FCD"}, {"titulo": "Inseminação artificial dos gêmeos na clínica da Contorno", "desc": "Procedimento premium na renomada Gênesis. Resultados em dose dupla.", "valor": 3000, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654073000.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304635B"}, {"titulo": "Viagem da Cora e do Nico pra Maldivas", "desc": "Pacote internacional de luxo para os dois. Passaportes em dia.", "valor": 1500, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654071500.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304703B"}, {"titulo": "Vacina de raiva do John John na Suíça", "desc": "Turismo de saúde de altíssimo padrão nos Alpes.", "valor": 2000, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654072000.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63042FC4"}, {"titulo": "Kit de cerâmicas decorativas do Casquilho", "desc": "Peças artesanais de edição limitada, direto do ateliê.", "valor": 330, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406330.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304EFF7"}, {"titulo": "Footing na pracinha de Conquista no Dia dos Namorados", "desc": "Programa romântico tradicional, com direito a voltinhas.", "valor": 50, "pix": "00020126330014br.gov.bcb.pix011108195316697520400005303986540550.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304A789"}, {"titulo": "Par de ingressos do show do Belo no Mineirão", "desc": "Setor premium. Lenço para as lágrimas incluso.", "valor": 700, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406700.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63046FCD"}, {"titulo": "Serenata no Coreto", "desc": "Apresentação musical ao vivo sob demanda. Repertório da casa.", "valor": 150, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406150.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304FB3F"}, {"titulo": "Tour no Cu de Zebra", "desc": "Roteiro exclusivo pelo destino mais falado da região.", "valor": 120, "pix": "00020126330014br.gov.bcb.pix0111081953166975204000053039865406120.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***6304C0C3"}, {"titulo": "Camisa do Galo assinada pelo Ronaldinho Gaúcho", "desc": "Item de colecionador. Autenticidade discutível.", "valor": 1200, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654071200.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63040B03"}, {"titulo": "Camisa do Cruzeiro assinada pelo Ronaldo Fenômeno", "desc": "Item de colecionador. Autenticidade igualmente discutível.", "valor": 1200, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654071200.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63040B03"}, {"titulo": "Conjunto de panelas Le Creuset", "desc": "O único item sério da lista. Ou não.", "valor": 2000, "pix": "00020126330014br.gov.bcb.pix01110819531669752040000530398654072000.005802BR5916Luiza e Henrique6014BELO HORIZONTE62070503***63042FC4"}];
 
 const fmt = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL",minimumFractionDigits:0});
-const cardapio = document.getElementById("cardapio");
 
+// ilustração e tom de fundo de cada experiência (na ordem da lista)
+const EMOJI = ["🪂","🍽️","🤿","🚌","⛪","🏚️","🎓","🏄","🏞️","🛳️","🎡","🦢","🚴","🐎","🍼","🏝️","🐶","🏺","💞","🎤","🎻","🦓","🐓","🦊","🍳"];
+const TINTA = ["#F3E2D9","#EBE7D3","#F6EEDD","#EFDCD8"];
+
+const carrossel = document.getElementById("carrossel");
 PRESENTES.forEach((p,i)=>{
-  const d=document.createElement("details");
-  d.className="prato";
-  d.innerHTML=`
-    <summary>
-      <span class="prato-titulo">${p.titulo}</span>
-      <span class="pontilhado" aria-hidden="true"></span>
-      <span class="preco">${fmt(p.valor)}</span>
-    </summary>
-    <div class="prato-corpo">
-      <p class="prato-desc">${p.desc}</p>
-      <div class="pix-caixa">
-        <p>Copie o código abaixo e cole na opção <strong>PIX copia e cola</strong> do seu banco. O valor já vai preenchido.</p>
-        <div class="pix-codigo">${p.pix}</div>
-        <button class="botao botao-cheio" data-i="${i}">Copiar código PIX</button><span class="copiado" hidden>Copiado ✓</span>
+  const c=document.createElement("article");
+  c.className="cartao";
+  c.innerHTML=`
+    <div class="cartao-img" style="background:${TINTA[i%TINTA.length]}" aria-hidden="true">${EMOJI[i]||"🎁"}</div>
+    <div class="cartao-corpo">
+      <span class="cartao-num">Experiência nº ${String(i+1).padStart(2,"0")}</span>
+      <h3 class="cartao-titulo">${p.titulo}</h3>
+      <p class="cartao-desc">${p.desc}</p>
+      <div class="cartao-rodape">
+        <span class="cartao-preco">${fmt(p.valor)}</span>
+        <button class="botao botao-cheio" data-i="${i}">Presentear</button>
       </div>
     </div>`;
-  cardapio.appendChild(d);
+  carrossel.appendChild(c);
 });
 
-cardapio.addEventListener("click", async e=>{
+// setas (desktop)
+const passo = ()=> (carrossel.querySelector(".cartao")?.offsetWidth||290)+14;
+document.getElementById("seta-esq").onclick=()=>carrossel.scrollBy({left:-passo(),behavior:"smooth"});
+document.getElementById("seta-dir").onclick=()=>carrossel.scrollBy({left:passo(),behavior:"smooth"});
+
+// modal PIX
+const modal=document.getElementById("pix-modal");
+let atual=null;
+carrossel.addEventListener("click", e=>{
   const b=e.target.closest("button[data-i]");
   if(!b) return;
-  const codigo=PRESENTES[+b.dataset.i].pix;
-  try{ await navigator.clipboard.writeText(codigo); }
+  atual=PRESENTES[+b.dataset.i];
+  document.getElementById("pm-titulo").textContent=atual.titulo;
+  document.getElementById("pm-desc").textContent=atual.desc;
+  document.getElementById("pm-preco").textContent=fmt(atual.valor);
+  document.getElementById("pm-codigo").textContent=atual.pix;
+  document.getElementById("pm-copiado").hidden=true;
+  modal.showModal();
+});
+document.getElementById("pix-fechar").onclick=()=>modal.close();
+modal.addEventListener("click", e=>{ if(e.target===modal) modal.close(); });
+document.getElementById("pm-copiar").addEventListener("click", async ()=>{
+  if(!atual) return;
+  try{ await navigator.clipboard.writeText(atual.pix); }
   catch{
     const t=document.createElement("textarea");
-    t.value=codigo; document.body.appendChild(t); t.select();
+    t.value=atual.pix; document.body.appendChild(t); t.select();
     document.execCommand("copy"); t.remove();
   }
-  const ok=b.nextElementSibling; ok.hidden=false;
+  const ok=document.getElementById("pm-copiado"); ok.hidden=false;
   setTimeout(()=>ok.hidden=true,2500);
 });
 
