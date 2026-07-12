@@ -163,6 +163,21 @@
   .cartao-num{
     font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
     color:var(--oliva);font-weight:600;
+    display:flex;align-items:baseline;gap:8px;
+  }
+  .cartao-escolhas{
+    margin-left:auto;letter-spacing:.06em;color:var(--vinho);
+    font-weight:600;white-space:nowrap;
+  }
+  .podio{
+    text-align:center;font-family:"Cormorant Garamond",Georgia,serif;
+    font-size:18px;color:var(--tinta);margin:18px 0 0;line-height:1.9;
+  }
+  .podio b{color:var(--vinho);font-weight:600}
+  .podio .podio-titulo{
+    display:block;font-family:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+    font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--oliva);font-weight:600;
   }
   .cartao-titulo{
     font-family:"Cormorant Garamond",Georgia,serif;font-size:21px;
@@ -334,6 +349,7 @@
       <button class="seta seta-dir" id="seta-dir" aria-label="Próxima experiência">›</button>
     </div>
     <p class="dica">Deslize para conhecer as 25 experiências →</p>
+    <p class="podio" id="podio" hidden></p>
   </div>
 </section>
 
@@ -386,7 +402,7 @@ PRESENTES.forEach((p,i)=>{
   c.innerHTML=`
     <div class="cartao-img" style="background:${TINTA[i%TINTA.length]}" aria-hidden="true">${EMOJI[i]||"🎁"}</div>
     <div class="cartao-corpo">
-      <span class="cartao-num">Experiência nº ${String(i+1).padStart(2,"0")}</span>
+      <span class="cartao-num">Experiência nº ${String(i+1).padStart(2,"0")}<span class="cartao-escolhas" data-escolhas="${i}" hidden></span></span>
       <h3 class="cartao-titulo">${p.titulo}</h3>
       <p class="cartao-desc">${p.desc}</p>
       <div class="cartao-rodape">
@@ -404,11 +420,12 @@ document.getElementById("seta-dir").onclick=()=>carrossel.scrollBy({left:passo()
 
 // modal PIX
 const modal=document.getElementById("pix-modal");
-let atual=null;
+let atual=null, atualI=-1;
 carrossel.addEventListener("click", e=>{
   const b=e.target.closest("button[data-i]");
   if(!b) return;
-  atual=PRESENTES[+b.dataset.i];
+  atualI=+b.dataset.i;
+  atual=PRESENTES[atualI];
   document.getElementById("pm-titulo").textContent=atual.titulo;
   document.getElementById("pm-desc").textContent=atual.desc;
   document.getElementById("pm-preco").textContent=fmt(atual.valor);
@@ -428,7 +445,38 @@ document.getElementById("pm-copiar").addEventListener("click", async ()=>{
   }
   const ok=document.getElementById("pm-copiado"); ok.hidden=false;
   setTimeout(()=>ok.hidden=true,2500);
+  registraEscolha(atualI);
 });
+
+// ranking de escolhas — contador compartilhado via Google Apps Script.
+// Mostra quantas vezes cada experiência foi escolhida (nunca valores).
+const RANKING_URL = ""; // colar aqui a URL /exec do Web App
+const MEDALHAS = ["🥇","🥈","🥉"];
+function aplicaRanking(c){
+  const contagens = PRESENTES.map((p,i)=>({i, n:Number(c[String(i)]||0)}));
+  contagens.forEach(({i,n})=>{
+    const el=document.querySelector(`[data-escolhas="${i}"]`);
+    if(el){ el.hidden=n<1; el.textContent=`escolhida ${n}×`; }
+  });
+  const top=contagens.filter(x=>x.n>0).sort((a,b)=>b.n-a.n).slice(0,3);
+  const podio=document.getElementById("podio");
+  if(!top.length){ podio.hidden=true; return; }
+  podio.innerHTML=`<span class="podio-titulo">As mais disputadas até agora</span>`+
+    top.map((x,k)=>`${MEDALHAS[k]} <b>${PRESENTES[x.i].titulo}</b>`).join(" &nbsp;·&nbsp; ");
+  podio.hidden=false;
+}
+async function carregaRanking(){
+  if(!RANKING_URL) return;
+  try{ aplicaRanking(await (await fetch(RANKING_URL)).json()); }catch{}
+}
+function registraEscolha(i){
+  if(!RANKING_URL || i<0) return;
+  const marca="escolha-"+i;
+  if(sessionStorage.getItem(marca)) return;
+  sessionStorage.setItem(marca,"1");
+  fetch(`${RANKING_URL}?acao=escolha&id=${i}`).then(r=>r.json()).then(aplicaRanking).catch(()=>{});
+}
+carregaRanking();
 
 const alvo=new Date("2026-08-04T11:00:00-03:00");
 function tick(){
