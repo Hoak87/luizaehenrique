@@ -450,7 +450,7 @@ document.getElementById("pm-copiar").addEventListener("click", async ()=>{
 
 // ranking de escolhas — contador compartilhado via Google Apps Script.
 // Mostra quantas vezes cada experiência foi escolhida (nunca valores).
-const RANKING_URL = ""; // colar aqui a URL /exec do Web App
+const RANKING_URL = "https://script.google.com/macros/s/AKfycbw4eA4QD6_25rymrk18hfxZuiidSC42K4Pa23UzNuc2tvzGuvFYoXWCkM671QjhBglyUg/exec";
 const MEDALHAS = ["🥇","🥈","🥉"];
 function aplicaRanking(c){
   const contagens = PRESENTES.map((p,i)=>({i, n:Number(c[String(i)]||0)}));
