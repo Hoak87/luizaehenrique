@@ -72,18 +72,18 @@
     object-fit:contain;pointer-events:none;user-select:none;
   }
   .arco-in{
-    position:absolute;left:11%;right:11.5%;top:17.5%;bottom:4%;z-index:2;
+    position:absolute;left:11%;right:11.5%;top:26%;bottom:7%;z-index:2;
     display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-    padding:5% 6% 1%;
+    padding:0 6% 1%;
   }
-  .monograma-img{width:min(100%,250px);height:auto;margin:0 0 8px}
+  .monograma-img{width:min(64%,185px);height:auto;margin:0 0 14px}
   .convite-linha{
     font-size:clamp(7.8px,2.2vw,9.5px);letter-spacing:.1em;text-transform:uppercase;
     color:var(--tinta);margin:0 auto;line-height:1.5;
   }
   h1{
     font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;
-    font-size:clamp(25px,7.4vw,36px);line-height:1;
+    font-size:clamp(23px,6.6vw,34px);line-height:1;
     color:var(--vinho);margin:14px 0 1px;
   }
   h1 .e{
@@ -92,8 +92,8 @@
   }
   .data-hero{
     font-family:"Cormorant Garamond",Georgia,serif;
-    font-size:clamp(11.5px,3.4vw,13.5px);letter-spacing:.26em;color:var(--vinho);
-    margin:12px 0 0;text-indent:.26em;line-height:1.35;
+    font-size:clamp(11px,3.2vw,13px);letter-spacing:.26em;color:var(--vinho);
+    margin:8px 0 0;text-indent:.26em;line-height:1.35;
   }
   .cidade{
     font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(9.8px,2.9vw,11.5px);
@@ -269,18 +269,10 @@
   .rsvp .botao-cheio{background:var(--papel);color:var(--vinho);border-color:var(--papel)}
   .rsvp .botao-cheio:hover{background:var(--creme)}
   footer{
-    text-align:center;padding:54px 22px 46px;color:var(--tinta);font-size:14px;
+    text-align:center;padding:54px 22px 40px;color:var(--suave);font-size:14px;
     border-top:1px solid var(--linha);
-    background-color:#E9DCC5;
-    background-image:url("assets/piso-azulejo.jpg");
-    background-size:241px 269px;
   }
-  footer .serif{
-    font-size:26px;font-style:italic;color:var(--vinho);
-    display:inline-block;margin-bottom:14px;
-    background:var(--papel);padding:10px 26px;border-radius:999px;
-    border:1px solid var(--linha);box-shadow:0 3px 16px rgba(94,44,35,.16);
-  }
+  footer .serif{font-size:26px;font-style:italic;color:var(--vinho);display:block;margin-bottom:6px}
 
   @media (prefers-reduced-motion: no-preference){
     header .sobe{animation:sobe .9s ease both}
@@ -407,7 +399,7 @@
 // alinha o piso do hero e da moldura do convite com o piso do fundo da página
 // (padrão contínuo através das camadas, sem emenda nem sobreposição)
 function alinhaPiso(){
-  document.querySelectorAll("header,.arco,footer").forEach(el=>{
+  document.querySelectorAll("header,.arco").forEach(el=>{
     const r=el.getBoundingClientRect();
     el.style.backgroundPosition=`${-(r.left+window.scrollX)}px ${-(r.top+window.scrollY)}px`;
   });
