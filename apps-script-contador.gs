@@ -43,8 +43,10 @@ function doGet(e) {
         else mural.splice(idx, 1);
         setMural(mural);
       }
+      const voltaUrl = `${ScriptApp.getService().getUrl()}?acao=painel&chave=${encodeURIComponent(e.parameter.chave)}`;
       return HtmlService.createHtmlOutput(
-        `<script>location.href="?acao=painel&chave=${encodeURIComponent(e.parameter.chave)}"</script>`
+        `<p style="font-family:sans-serif">Feito! <a href="${voltaUrl}" target="_top">Voltar ao painel</a></p>` +
+        `<script>top.location.href=${JSON.stringify(voltaUrl)}</script>`
       );
     }
 
@@ -105,25 +107,25 @@ function painelHtml(chave) {
   const pendentes = mural.filter(m => m.status === 'pendente');
   const aprovados = mural.filter(m => m.status === 'aprovado');
 
-  const linha = (m, mostrarAcoes) => `
+  const linha = (m, mostrarAprovar) => `
     <div style="border:1px solid #e3d5be;border-radius:10px;padding:14px;margin-bottom:10px;font-family:sans-serif">
       <div style="font-weight:600;color:#7E3231">${escapeHtml(m.nome)}</div>
       <div style="margin:6px 0;color:#3A2E2A">${escapeHtml(m.mensagem)}</div>
       <div style="font-size:12px;color:#7A6A60">${new Date(m.ts).toLocaleString('pt-BR')}</div>
-      ${mostrarAcoes ? `
-        <div style="margin-top:8px">
-          <a href="${base}?acao=aprovar&id=${m.id}&chave=${encodeURIComponent(chave)}"
-             style="color:#877B3D;font-weight:600;text-decoration:none;margin-right:16px">✓ Aprovar</a>
-          <a href="${base}?acao=rejeitar&id=${m.id}&chave=${encodeURIComponent(chave)}"
-             style="color:#7E3231;font-weight:600;text-decoration:none">✕ Excluir</a>
-        </div>` : ''}
+      <div style="margin-top:8px">
+        ${mostrarAprovar ? `
+          <a href="${base}?acao=aprovar&id=${m.id}&chave=${encodeURIComponent(chave)}" target="_top"
+             style="color:#877B3D;font-weight:600;text-decoration:none;margin-right:16px">✓ Aprovar</a>` : ''}
+        <a href="${base}?acao=rejeitar&id=${m.id}&chave=${encodeURIComponent(chave)}" target="_top"
+           style="color:#7E3231;font-weight:600;text-decoration:none">✕ Excluir</a>
+      </div>
     </div>`;
 
   return `
     <html><body style="max-width:600px;margin:30px auto;padding:0 16px">
       <h2 style="font-family:sans-serif;color:#7E3231">Recados pendentes (${pendentes.length})</h2>
       ${pendentes.length ? pendentes.map(m => linha(m, true)).join('') : '<p style="font-family:sans-serif;color:#7A6A60">Nenhum recado esperando aprovação.</p>'}
-      <h2 style="font-family:sans-serif;color:#7E3231;margin-top:30px">Já aprovados (${aprovados.length})</h2>
+      <h2 style="font-family:sans-serif;color:#7E3231;margin-top:30px">Publicados no mural (${aprovados.length})</h2>
       ${aprovados.length ? aprovados.map(m => linha(m, false)).join('') : '<p style="font-family:sans-serif;color:#7A6A60">Nenhum ainda.</p>'}
     </body></html>`;
 }
