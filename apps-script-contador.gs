@@ -69,7 +69,7 @@ function doPost(e) {
         nome,
         mensagem,
         ts: Date.now(),
-        status: 'pendente'
+        status: 'aprovado' // vai direto ao ar, sem moderação
       });
       setMural(mural);
       return jsonOut({ ok: true });

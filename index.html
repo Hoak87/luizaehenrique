@@ -411,7 +411,7 @@
   <div class="wrap">
     <span class="eyebrow">Mural de recados</span>
     <h2>Deixe um recado pro casal</h2>
-    <p class="nota">Fica registrado com carinho — aparece aqui assim que a Lu e o Henrique derem uma olhada.</p>
+    <p class="nota">Fica registrado com carinho — aparece aqui na hora.</p>
     <form class="mural-form" id="mural-form">
       <input type="text" id="mural-nome" placeholder="Seu nome" maxlength="60" required>
       <textarea id="mural-msg" placeholder="Escreva seu recado..." maxlength="500" rows="3" required></textarea>
@@ -584,8 +584,9 @@ document.getElementById("mural-form").addEventListener("submit", async e=>{
     });
     const j=await r.json();
     if(j.ok){
-      status.textContent="Recado enviado! Vai aparecer aqui assim que for aprovado. 💛";
+      status.textContent="Recado enviado! 💛";
       e.target.reset();
+      carregaMural();
     } else {
       status.textContent="Não deu pra enviar agora, tenta de novo em instantes.";
       status.classList.add("erro");
