@@ -250,6 +250,29 @@
   }
   .copiado{color:var(--oliva);font-weight:600;font-size:14px;margin-left:10px}
 
+  /* ---------- mural de recados ---------- */
+  .mural-form{max-width:480px;margin:0 auto 36px;display:flex;flex-direction:column;gap:12px}
+  .mural-form input,.mural-form textarea{
+    font-family:inherit;font-size:15px;color:var(--tinta);
+    border:1px solid var(--linha);border-radius:10px;padding:12px 14px;
+    background:var(--papel);resize:vertical;
+  }
+  .mural-form input:focus,.mural-form textarea:focus{outline:2px solid var(--dourado);outline-offset:1px}
+  .mural-form .botao-cheio{align-self:flex-start}
+  .mural-status{font-size:14px;color:var(--oliva);font-weight:600;margin:0}
+  .mural-status.erro{color:var(--vinho)}
+  .mural-lista{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+  .mural-item{
+    border:1px solid var(--linha);border-radius:12px;background:var(--papel);
+    padding:16px 18px;box-shadow:0 1px 10px rgba(94,44,35,.06);
+  }
+  .mural-item .nome{
+    font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;
+    color:var(--vinho);font-size:18px;
+  }
+  .mural-item .msg{margin:6px 0 0;color:var(--tinta);line-height:1.55}
+  .mural-vazio{text-align:center;color:var(--suave);font-style:italic;font-family:"Cormorant Garamond",Georgia,serif;font-size:18px}
+
   /* ---------- seções coloridas: grande dia (oliva) e rsvp (vinho) ---------- */
   #dia{background:var(--oliva);border-top:none}
   #dia .eyebrow{color:var(--creme)}
@@ -384,6 +407,21 @@
   </div>
 </dialog>
 
+<section id="mural">
+  <div class="wrap">
+    <span class="eyebrow">Mural de recados</span>
+    <h2>Deixe um recado pro casal</h2>
+    <p class="nota">Fica registrado com carinho — aparece aqui assim que a Lu e o Henrique derem uma olhada.</p>
+    <form class="mural-form" id="mural-form">
+      <input type="text" id="mural-nome" placeholder="Seu nome" maxlength="60" required>
+      <textarea id="mural-msg" placeholder="Escreva seu recado..." maxlength="500" rows="3" required></textarea>
+      <button type="submit" class="botao botao-cheio" id="mural-enviar">Enviar recado</button>
+      <p class="mural-status" id="mural-status" hidden></p>
+    </form>
+    <div class="mural-lista" id="mural-lista"></div>
+  </div>
+</section>
+
 <section class="rsvp" id="rsvp">
   <div class="wrap">
     <span class="eyebrow">Confirmação</span>
@@ -508,6 +546,58 @@ function registraEscolha(i){
   fetch(`${RANKING_URL}?acao=escolha&id=${i}`).then(r=>r.json()).then(aplicaRanking).catch(()=>{});
 }
 carregaRanking();
+
+// mural de recados — mesmo Apps Script do ranking (ação "mural"/"recado")
+function escapeHtml(s){
+  return s.replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function renderMural(lista){
+  const el=document.getElementById("mural-lista");
+  if(!lista || !lista.length){
+    el.innerHTML=`<p class="mural-vazio">Nenhum recado ainda — seja o primeiro!</p>`;
+    return;
+  }
+  el.innerHTML=lista.map(m=>`
+    <div class="mural-item">
+      <div class="nome">${escapeHtml(m.nome)}</div>
+      <p class="msg">${escapeHtml(m.mensagem)}</p>
+    </div>`).join("");
+}
+async function carregaMural(){
+  if(!RANKING_URL) return;
+  try{ renderMural(await (await fetch(`${RANKING_URL}?acao=mural`)).json()); }catch{}
+}
+document.getElementById("mural-form").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const nome=document.getElementById("mural-nome").value.trim();
+  const mensagem=document.getElementById("mural-msg").value.trim();
+  const status=document.getElementById("mural-status");
+  const botao=document.getElementById("mural-enviar");
+  if(!RANKING_URL || !nome || !mensagem) return;
+  botao.disabled=true;
+  status.hidden=true; status.className="mural-status";
+  try{
+    const r=await fetch(RANKING_URL,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify({acao:"recado", nome, mensagem})
+    });
+    const j=await r.json();
+    if(j.ok){
+      status.textContent="Recado enviado! Vai aparecer aqui assim que for aprovado. 💛";
+      e.target.reset();
+    } else {
+      status.textContent="Não deu pra enviar agora, tenta de novo em instantes.";
+      status.classList.add("erro");
+    }
+  }catch{
+    status.textContent="Não deu pra enviar agora, tenta de novo em instantes.";
+    status.classList.add("erro");
+  }
+  status.hidden=false;
+  botao.disabled=false;
+});
+carregaMural();
 
 const alvo=new Date("2026-08-04T11:00:00-03:00");
 function tick(){
