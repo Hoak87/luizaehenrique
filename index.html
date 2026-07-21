@@ -148,13 +148,13 @@
   #presentes .wrap{max-width:860px}
   .carrossel-wrap{position:relative}
   .carrossel{
-    display:flex;gap:14px;overflow-x:auto;
+    display:flex;align-items:flex-start;gap:14px;overflow-x:auto;
     scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
     padding:6px 2px 10px;scrollbar-width:none;
   }
   .carrossel::-webkit-scrollbar{display:none}
   .cartao{
-    scroll-snap-align:center;flex:0 0 min(74vw,290px);
+    scroll-snap-align:center;flex:0 0 min(84vw,320px);
     border:1px solid var(--linha);border-radius:14px;background:var(--papel);
     overflow:hidden;display:flex;flex-direction:column;
     box-shadow:0 1px 12px rgba(94,44,35,.09);
@@ -191,7 +191,8 @@
   }
   .cartao-desc{
     font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;
-    font-size:16px;color:var(--suave);flex:1;line-height:1.45;
+    font-size:16px;color:var(--suave);line-height:1.45;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
   }
   .cartao-rodape{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px}
   .cartao-preco{
@@ -235,7 +236,7 @@
     font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;
     font-size:24px;margin:0 34px 2px 0;color:var(--vinho);
   }
-  .pix-modal .cartao-desc{margin:0 0 6px}
+  .pix-modal .cartao-desc{margin:0 0 6px;display:block;-webkit-line-clamp:unset;overflow:visible}
   .pix-modal .cartao-preco{font-size:26px;display:block;margin:6px 0 14px}
   .pix-caixa{
     background:var(--papel);border:1px solid var(--linha);border-radius:10px;
@@ -392,7 +393,7 @@
       <div class="carrossel" id="carrossel" aria-label="Vitrine de experiências"></div>
       <button class="seta seta-dir" id="seta-dir" aria-label="Próxima experiência">›</button>
     </div>
-    <p class="dica">Deslize para conhecer as 22 experiências →</p>
+    <p class="dica" id="dica-contagem">Deslize para conhecer as experiências →</p>
     <p class="podio" id="podio" hidden></p>
   </div>
 </section>
@@ -483,6 +484,7 @@ PRESENTES.forEach((p,i)=>{
     </div>`;
   carrossel.appendChild(c);
 });
+document.getElementById("dica-contagem").textContent = `Deslize para conhecer as ${PRESENTES.length} experiências →`;
 
 // setas (desktop)
 const passo = ()=> (carrossel.querySelector(".cartao")?.offsetWidth||290)+14;
