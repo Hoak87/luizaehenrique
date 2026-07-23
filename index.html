@@ -144,7 +144,13 @@
   .botao-cheio:hover{background:var(--vinho-esc)}
 
   /* ---------- vitrine de experiências (carrossel) ---------- */
-  #presentes{background:var(--rosa-claro);border-top:none}
+  #presentes{background:var(--rosa-claro);border-top:none;position:relative}
+  #presentes::before{
+    content:"";position:absolute;inset:0;
+    background-image:url("assets/piso-azulejo.jpg");background-size:241px 269px;
+    opacity:.14;mix-blend-mode:multiply;pointer-events:none;
+  }
+  #presentes>.wrap{position:relative;z-index:1}
   #presentes .wrap{max-width:860px}
   .carrossel-wrap{position:relative}
   .carrossel{
@@ -280,7 +286,13 @@
   .mural-vazio{text-align:center;color:var(--suave);font-style:italic;font-family:"Cormorant Garamond",Georgia,serif;font-size:18px}
 
   /* ---------- seções coloridas: grande dia (oliva) e rsvp (vinho) ---------- */
-  #dia{background:var(--oliva);border-top:none}
+  #dia{background:var(--oliva);border-top:none;position:relative}
+  #dia::before{
+    content:"";position:absolute;inset:0;
+    background-image:url("assets/piso-azulejo.jpg");background-size:241px 269px;
+    opacity:.14;mix-blend-mode:multiply;pointer-events:none;
+  }
+  #dia>.wrap{position:relative;z-index:1}
   #dia .eyebrow{color:var(--creme)}
   #dia h2{color:var(--papel)}
   #dia .nota{color:rgba(252,248,238,.88)}
