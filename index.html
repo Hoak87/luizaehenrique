@@ -294,27 +294,27 @@
   .mural-item .msg{margin:6px 0 0;color:var(--tinta);line-height:1.55}
   .mural-vazio{text-align:center;color:var(--suave);font-style:italic;font-family:"Cormorant Garamond",Georgia,serif;font-size:18px}
 
-  /* ---------- seções coloridas: grande dia (oliva) e rsvp (vinho) ---------- */
-  #dia{background:var(--oliva);border-top:none;position:relative}
-  #dia::before{
+  /* ---------- seções coloridas transparentes: nosso dia (vinho) / bênção+almoço (verde) / dress code (rosa antigo) / rsvp (vinho sólido) ---------- */
+  #nosso-dia,#bencao,#almoco,#dress-code{position:relative}
+  #nosso-dia::before,#bencao::before,#almoco::before,#dress-code::before{
     content:"";position:absolute;inset:0;
     background-image:url("assets/piso-azulejo.jpg");background-size:241px 269px;
     opacity:.14;mix-blend-mode:multiply;pointer-events:none;
   }
-  #dia>.wrap{position:relative;z-index:1}
-  #dia .eyebrow{color:var(--creme)}
-  #dia h2{color:var(--papel)}
-  #dia .nota{color:rgba(252,248,238,.94);font-style:normal;font-size:21px;font-weight:500}
-  #dia .evento h3{color:var(--papel)}
-  #dia .hora{
+  #nosso-dia>.wrap,#bencao>.wrap,#almoco>.wrap,#dress-code>.wrap{position:relative;z-index:1}
+  #nosso-dia{background:rgba(126,50,49,.16);border-top:none}
+  #bencao,#almoco{background:rgba(135,123,61,.26)}
+  #dress-code{background:rgba(200,159,151,.32)}
+  #nosso-dia .nota,#bencao .nota,#almoco .nota,#dress-code .nota{
+    color:#5C4C42;font-style:normal;font-size:21px;font-weight:500;
+  }
+  #bencao .hora,#almoco .hora{
     display:inline-block;font-style:normal;font-weight:700;
     background:var(--papel);color:var(--vinho);
     padding:8px 18px;border-radius:999px;font-size:19px;margin:2px 0 10px;
   }
-  #dia .endereco{color:rgba(252,248,238,.82);font-weight:700}
+  #bencao .endereco,#almoco .endereco{color:#5C4C42;font-weight:700}
   .hora-forte{font-weight:700}
-  #dia .botao{border-color:var(--papel);color:var(--papel)}
-  #dia .botao:hover{background:var(--papel);color:var(--oliva)}
 
   /* ---------- rsvp / rodapé ---------- */
   .rsvp{text-align:center;background:var(--vinho);border-top:none}
@@ -368,7 +368,7 @@
   </div>
 </header>
 
-<section id="dia">
+<section id="nosso-dia">
   <div class="wrap">
     <span class="eyebrow">O nosso dia · 04.08.2026</span>
     <h2>Bênção &amp; Almoço</h2>
@@ -380,7 +380,11 @@
     <p class="nota">Foi assim que nasceu o nosso casamento, e em breve estaremos diante do nosso eterno SIM.</p>
     <p class="nota">Sabemos que uma manhã de terça-feira não é a data mais fácil para todos. Por isso, cada pessoa que conseguir estar ao nosso lado fará esse dia ainda mais especial. A presença de vocês é, sem dúvida, o nosso maior presente.</p>
     <p class="nota">Ver a alegria e o entusiasmo das nossas famílias nos inspirou a criar este site: um cantinho para compartilhar a nossa história, reunir todas as informações e dividir com vocês os detalhes desse dia, preparado com muito amor e significado.</p>
+  </div>
+</section>
 
+<section id="bencao">
+  <div class="wrap">
     <div class="evento">
       <h3>Bênção</h3>
       <p class="nota">Nossa cerimônia religiosa será celebrada na Capela do Colégio Arnaldo, um lugar que faz parte da história da Luíza desde a infância. O famoso "coleginho" guarda algumas das lembranças mais especiais da nossa família e, por isso, não poderíamos imaginar um cenário mais significativo para abençoar o nosso casamento.</p>
@@ -395,7 +399,11 @@
         <a class="botao" href="https://waze.com/ul?q=Pra%C3%A7a%20Jo%C3%A3o%20Pessoa%20200%20Funcion%C3%A1rios%20Belo%20Horizonte&navigate=yes" target="_blank" rel="noopener">Waze</a>
       </div>
     </div>
+  </div>
+</section>
 
+<section id="almoco">
+  <div class="wrap">
     <div class="evento">
       <h3>Almoço</h3>
       <p class="nota">Após a cerimônia, receberemos todos no Instituto Ivo Faria para um almoço pensado com muito carinho, para ser vivido sem pressa, exatamente como imaginamos: com boa comida, música e a alegria das nossas famílias reunidas.</p>
@@ -410,7 +418,11 @@
         <a class="botao" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bformatted_address%5D=Rua%20Modesto%20de%20Carvalho%20Ara%C3%BAjo%2C%20652%20-%20Belvedere%2C%20Belo%20Horizonte" target="_blank" rel="noopener">Uber</a>
       </div>
     </div>
+  </div>
+</section>
 
+<section id="dress-code">
+  <div class="wrap">
     <div class="evento">
       <h3>Dress code</h3>
       <p class="nota">Nosso casamento será um almoço com uma atmosfera leve, acolhedora e elegante.</p>
