@@ -149,12 +149,13 @@
   #presentes .nota{color:var(--vinho);font-style:normal;font-size:21px;font-weight:500}
   #presentes .endereco{color:var(--vinho);font-weight:700}
   .nota-destaque{font-weight:600}
+  #presentes .nota-destaque{font-weight:700}
   .nota-destaque strong{color:var(--vinho);font-weight:700}
   .presentes-fisicos{margin-top:34px;padding-top:26px;padding-bottom:22px;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
   .enderecos-fisicos{display:flex;flex-wrap:wrap;gap:24px;margin-top:8px}
   .endereco-titulo{font-weight:700;color:var(--vinho);margin:0 0 2px;font-size:15px;letter-spacing:.02em}
   #presentes .wrap{max-width:860px}
-  .carrossel-wrap{position:relative}
+  .carrossel-wrap{position:relative;overflow:hidden;transition:height .3s ease}
   .carrossel{
     display:flex;align-items:flex-start;gap:14px;overflow-x:auto;
     scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
@@ -304,9 +305,10 @@
   #nosso-dia{background:rgba(126,50,49,.7);border-top:none}
   #bencao,#almoco{background:rgba(135,123,61,.65)}
   #dress-code{background:rgba(200,159,151,.55)}
-  #bencao h3,#almoco h3{color:var(--papel);text-shadow:0 1px 2px rgba(58,46,42,.55),0 1px 10px rgba(58,46,42,.3)}
+  #bencao h3,#almoco h3,#dress-code h3{color:var(--papel);text-shadow:0 1px 2px rgba(58,46,42,.55),0 1px 10px rgba(58,46,42,.3)}
   #dress-code .nota{
-    color:var(--vinho);font-style:normal;font-size:21px;font-weight:500;
+    color:var(--papel);font-style:normal;font-size:21px;font-weight:500;
+    text-shadow:0 1px 2px rgba(58,46,42,.5),0 1px 8px rgba(58,46,42,.25);
   }
   #bencao .nota,#almoco .nota{
     color:var(--papel);font-style:normal;font-size:21px;font-weight:500;
@@ -568,6 +570,29 @@ document.getElementById("dica-contagem").textContent = `Deslize para conhecer as
 const passo = ()=> (carrossel.querySelector(".cartao")?.offsetWidth||290)+14;
 document.getElementById("seta-esq").onclick=()=>carrossel.scrollBy({left:-passo(),behavior:"smooth"});
 document.getElementById("seta-dir").onclick=()=>carrossel.scrollBy({left:passo(),behavior:"smooth"});
+
+// altura do carrossel-wrap acompanha o card visível (evita espaço vazio embaixo dos cards mais curtos);
+// o wrap corta o excesso (overflow:hidden) sem afetar o scroll horizontal, que continua no .carrossel interno
+const carrosselWrap = document.querySelector(".carrossel-wrap");
+const cartoes = [...carrossel.querySelectorAll(".cartao")];
+function ajustaAlturaCarrossel(){
+  const wrapRect = carrosselWrap.getBoundingClientRect();
+  const centro = wrapRect.left + wrapRect.width/2;
+  let maisPerto = null, menorDist = Infinity;
+  cartoes.forEach(c=>{
+    const r = c.getBoundingClientRect();
+    const dist = Math.abs((r.left+r.width/2) - centro);
+    if(dist < menorDist){ menorDist = dist; maisPerto = c; }
+  });
+  if(maisPerto) carrosselWrap.style.height = maisPerto.offsetHeight + "px";
+}
+let tCarrossel;
+carrossel.addEventListener("scroll", ()=>{
+  clearTimeout(tCarrossel);
+  tCarrossel = setTimeout(ajustaAlturaCarrossel, 60);
+});
+window.addEventListener("resize", ajustaAlturaCarrossel);
+ajustaAlturaCarrossel();
 
 // modal PIX
 const modal=document.getElementById("pix-modal");
