@@ -144,12 +144,7 @@
   .botao-cheio:hover{background:var(--vinho-esc)}
 
   /* ---------- vitrine de experiências (carrossel) ---------- */
-  #presentes{background:var(--rosa-claro);border-top:none;position:relative}
-  #presentes::before{
-    content:"";position:absolute;inset:0;
-    background-image:url("assets/piso-azulejo.jpg");background-size:241px 269px;
-    opacity:.07;mix-blend-mode:multiply;pointer-events:none;
-  }
+  #presentes{background:rgba(243,222,210,.55);border-top:none;position:relative}
   #presentes>.wrap{position:relative;z-index:1}
   #presentes .nota{color:#5C4C42}
   #presentes .endereco{color:#5C4C42;font-weight:700}
@@ -295,12 +290,13 @@
   .mural-vazio{text-align:center;color:var(--suave);font-style:italic;font-family:"Cormorant Garamond",Georgia,serif;font-size:18px}
 
   /* ---------- seções coloridas transparentes: nosso dia (vinho) / bênção+almoço (verde) / dress code (rosa antigo) / rsvp (vinho sólido) ---------- */
-  #nosso-dia,#bencao,#almoco,#dress-code{position:relative}
-  #nosso-dia::before,#bencao::before,#almoco::before,#dress-code::before{
+  .papel-continuo{position:relative}
+  .papel-continuo::before{
     content:"";position:absolute;inset:0;
     background-image:url("assets/piso-azulejo.jpg");background-size:241px 269px;
     opacity:.07;mix-blend-mode:multiply;pointer-events:none;
   }
+  .papel-continuo>section{position:relative}
   #nosso-dia>.wrap,#bencao>.wrap,#almoco>.wrap,#dress-code>.wrap{position:relative;z-index:1}
   #nosso-dia{background:rgba(126,50,49,.16);border-top:none}
   #bencao,#almoco{background:rgba(135,123,61,.26)}
@@ -368,6 +364,7 @@
   </div>
 </header>
 
+<div class="papel-continuo">
 <section id="nosso-dia">
   <div class="wrap">
     <span class="eyebrow">O nosso dia · 04.08.2026</span>
@@ -463,6 +460,7 @@
     </div>
   </div>
 </section>
+</div>
 
 <dialog class="pix-modal" id="pix-modal">
   <div class="pix-modal-in">
