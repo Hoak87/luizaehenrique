@@ -124,7 +124,7 @@
   .evento{margin-top:26px}
   .evento h3{
     font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;
-    font-size:24px;margin:0 0 2px;
+    font-size:32px;margin:0 0 6px;
   }
   .hora{
     font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;
@@ -148,7 +148,9 @@
   #presentes>.wrap{position:relative;z-index:1}
   #presentes .nota{color:#5C4C42}
   #presentes .endereco{color:#5C4C42;font-weight:700}
-  .presentes-fisicos{margin-top:34px;padding-top:26px;border-top:1px solid var(--linha)}
+  .nota-destaque{font-weight:600}
+  .nota-destaque strong{color:var(--vinho);font-weight:700}
+  .presentes-fisicos{margin-top:34px;padding-top:26px;padding-bottom:22px;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
   .enderecos-fisicos{display:flex;flex-wrap:wrap;gap:24px;margin-top:8px}
   .endereco-titulo{font-weight:700;color:var(--vinho);margin:0 0 2px;font-size:15px;letter-spacing:.02em}
   #presentes .wrap{max-width:860px}
@@ -299,8 +301,9 @@
   .papel-continuo>section{position:relative}
   #nosso-dia>.wrap,#bencao>.wrap,#almoco>.wrap,#dress-code>.wrap{position:relative;z-index:1}
   #nosso-dia{background:rgba(126,50,49,.7);border-top:none}
-  #bencao,#almoco{background:rgba(135,123,61,.62)}
-  #dress-code{background:rgba(200,159,151,.32)}
+  #bencao,#almoco{background:rgba(135,123,61,.82)}
+  #dress-code{background:rgba(200,159,151,.55)}
+  #bencao h3,#almoco h3{color:var(--papel);text-shadow:0 1px 3px rgba(58,46,42,.35)}
   #dress-code .nota{
     color:#5C4C42;font-style:normal;font-size:21px;font-weight:500;
   }
@@ -443,7 +446,7 @@
     <p class="nota">Vocês pediram, nós atendemos: chegou a famosa lista de presentes!</p>
     <p class="nota">Preparamos uma curadoria exclusiva de experiências que, muito provavelmente, ninguém vai viver. Cada uma delas nasceu de lembranças da nossa família que, até hoje, rendem boas risadas e carregam um significado muito especial para todos nós. É uma forma divertida de compartilhar um pedacinho da nossa trajetória com vocês.</p>
     <p class="nota">Fiquem à vontade para escolher a sua experiência favorita… ou, quem sabe, até várias delas!</p>
-    <p class="nota">Faça o PIX e pronto: a experiência fica por nossa conta; a lembrança, por sua conta e risco.</p>
+    <p class="nota nota-destaque"><strong>Experiências:</strong> Faça o PIX e pronto — a experiência fica por nossa conta; a lembrança, por sua conta e risco.</p>
     <div class="presentes-fisicos">
       <p class="nota">Se preferirem nos presentear com um presente físico, seguem os nossos endereços:</p>
       <div class="enderecos-fisicos">
