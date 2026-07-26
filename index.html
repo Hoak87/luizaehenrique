@@ -296,19 +296,20 @@
   .papel-continuo::before{
     content:"";position:absolute;inset:0;
     background-image:url("assets/piso-azulejo.jpg");background-size:241px 269px;
-    opacity:.07;mix-blend-mode:multiply;pointer-events:none;
+    opacity:.13;mix-blend-mode:multiply;pointer-events:none;
   }
   .papel-continuo>section{position:relative}
   #nosso-dia>.wrap,#bencao>.wrap,#almoco>.wrap,#dress-code>.wrap{position:relative;z-index:1}
   #nosso-dia{background:rgba(126,50,49,.7);border-top:none}
-  #bencao,#almoco{background:rgba(135,123,61,.82)}
+  #bencao,#almoco{background:rgba(135,123,61,.55)}
   #dress-code{background:rgba(200,159,151,.55)}
-  #bencao h3,#almoco h3{color:var(--papel);text-shadow:0 1px 3px rgba(58,46,42,.35)}
+  #bencao h3,#almoco h3{color:var(--papel);text-shadow:0 1px 2px rgba(58,46,42,.55),0 1px 10px rgba(58,46,42,.3)}
   #dress-code .nota{
     color:#5C4C42;font-style:normal;font-size:21px;font-weight:500;
   }
   #bencao .nota,#almoco .nota{
-    color:var(--tinta);font-style:normal;font-size:21px;font-weight:500;
+    color:var(--papel);font-style:normal;font-size:21px;font-weight:500;
+    text-shadow:0 1px 2px rgba(58,46,42,.5),0 1px 8px rgba(58,46,42,.25);
   }
   #nosso-dia h2{color:var(--papel)}
   #nosso-dia .nota{
@@ -319,7 +320,7 @@
     background:var(--papel);color:var(--vinho);
     padding:8px 18px;border-radius:999px;font-size:19px;margin:2px 0 10px;
   }
-  #bencao .endereco,#almoco .endereco{color:var(--tinta);font-weight:700}
+  #bencao .endereco,#almoco .endereco{color:var(--papel);font-weight:700;text-shadow:0 1px 2px rgba(58,46,42,.5)}
   .hora-forte{font-weight:700}
 
   /* ---------- rsvp / rodapé ---------- */
