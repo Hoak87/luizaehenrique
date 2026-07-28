@@ -7,6 +7,8 @@
 <meta name="description" content="Casamento de Luíza e Henrique — 04 de agosto de 2026, Belo Horizonte">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://script.google.com">
+<link rel="preconnect" href="https://script.googleusercontent.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -627,9 +629,18 @@ function renderMural(lista){
       <p class="msg">${escapeHtml(m.mensagem)}</p>
     </div>`).join("");
 }
+const MURAL_CACHE_KEY="mural-cache-v1";
 async function carregaMural(){
   if(!RANKING_URL) return;
-  try{ renderMural(await (await fetch(`${RANKING_URL}?acao=mural`)).json()); }catch{}
+  try{
+    const cache=JSON.parse(localStorage.getItem(MURAL_CACHE_KEY)||"null");
+    if(cache){ renderMural(cache); } else { document.getElementById("mural-lista").innerHTML=`<p class="mural-vazio">Carregando recados…</p>`; }
+  }catch{}
+  try{
+    const lista=await (await fetch(`${RANKING_URL}?acao=mural`)).json();
+    renderMural(lista);
+    localStorage.setItem(MURAL_CACHE_KEY, JSON.stringify(lista));
+  }catch{}
 }
 document.getElementById("mural-form").addEventListener("submit", async e=>{
   e.preventDefault();
