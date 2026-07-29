@@ -210,19 +210,15 @@
   .seta:hover{background:var(--vinho-esc)}
   .seta-esq{left:6px}
   .seta-dir{right:6px}
-  @keyframes setaChama{
-    0%,100%{transform:translateX(0)}
-    50%{transform:translateX(6px)}
-  }
-  .seta-dir.chama{animation:setaChama 1.1s ease-in-out 3}
   .dica-swipe{
     text-align:center;font-family:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
     font-size:15px;font-weight:600;color:var(--vinho);margin:0 0 12px;
     letter-spacing:.02em;
   }
   .dica{
-    text-align:center;font-family:"Cormorant Garamond",Georgia,serif;
-    font-style:italic;font-size:17px;color:var(--suave);margin:14px 0 0;
+    text-align:center;font-family:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+    font-weight:700;font-size:23px;color:var(--vinho);margin:16px 0 0;
+    letter-spacing:.01em;
   }
 
   /* modal do PIX */
@@ -565,7 +561,6 @@ PRESENTES.forEach((p,i)=>{
 const passo = ()=> (carrossel.querySelector(".cartao")?.offsetWidth||290)+14;
 document.getElementById("seta-esq").onclick=()=>carrossel.scrollBy({left:-passo(),behavior:"smooth"});
 document.getElementById("seta-dir").onclick=()=>carrossel.scrollBy({left:passo(),behavior:"smooth"});
-setTimeout(()=>document.getElementById("seta-dir").classList.add("chama"), 900);
 
 // altura do carrossel-wrap acompanha o card visível (evita espaço vazio embaixo dos cards mais curtos);
 // o wrap corta o excesso (overflow:hidden) sem afetar o scroll horizontal, que continua no .carrossel interno.
@@ -587,12 +582,32 @@ function ajustaAlturaCarrossel(){
 }
 let tCarrossel;
 carrossel.addEventListener("scroll", ()=>{
-  document.getElementById("seta-dir").classList.remove("chama");
   clearTimeout(tCarrossel);
   tCarrossel = setTimeout(ajustaAlturaCarrossel, 60);
 });
 window.addEventListener("resize", ajustaAlturaCarrossel);
 ajustaAlturaCarrossel();
+
+// auto-avanço: passa sozinho pelas primeiras experiências pra deixar claro que dá pra
+// navegar (muitos convidados não percebem o gesto de deslizar). Para assim que a pessoa
+// interagir (toque, arrasto, scroll ou clique nas setas), pra não brigar com quem já entendeu.
+let autoAvancoAtivo = true;
+let autoAvancoTimer = null;
+function paraAutoAvanco(){
+  autoAvancoAtivo = false;
+  clearTimeout(autoAvancoTimer);
+}
+function passoAutoAvanco(){
+  if(!autoAvancoAtivo) return;
+  const maxScroll = carrossel.scrollWidth - carrossel.clientWidth;
+  if(carrossel.scrollLeft >= maxScroll - 10){ paraAutoAvanco(); return; }
+  carrossel.scrollBy({left:passo(), behavior:"smooth"});
+  autoAvancoTimer = setTimeout(passoAutoAvanco, 2800);
+}
+["touchstart","wheel","mousedown"].forEach(ev=>carrossel.addEventListener(ev, paraAutoAvanco, {passive:true}));
+document.getElementById("seta-esq").addEventListener("click", paraAutoAvanco);
+document.getElementById("seta-dir").addEventListener("click", paraAutoAvanco);
+autoAvancoTimer = setTimeout(passoAutoAvanco, 1800);
 
 // modal PIX
 const modal=document.getElementById("pix-modal");
