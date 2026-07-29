@@ -602,12 +602,12 @@ function passoAutoAvanco(){
   const maxScroll = carrossel.scrollWidth - carrossel.clientWidth;
   if(carrossel.scrollLeft >= maxScroll - 10){ paraAutoAvanco(); return; }
   carrossel.scrollBy({left:passo(), behavior:"smooth"});
-  autoAvancoTimer = setTimeout(passoAutoAvanco, 2800);
+  autoAvancoTimer = setTimeout(passoAutoAvanco, 7000);
 }
 ["touchstart","wheel","mousedown"].forEach(ev=>carrossel.addEventListener(ev, paraAutoAvanco, {passive:true}));
 document.getElementById("seta-esq").addEventListener("click", paraAutoAvanco);
 document.getElementById("seta-dir").addEventListener("click", paraAutoAvanco);
-autoAvancoTimer = setTimeout(passoAutoAvanco, 1800);
+autoAvancoTimer = setTimeout(passoAutoAvanco, 7000);
 
 // modal PIX
 const modal=document.getElementById("pix-modal");
